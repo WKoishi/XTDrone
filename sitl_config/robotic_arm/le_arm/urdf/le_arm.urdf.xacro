@@ -13,10 +13,17 @@
             name="arm_base_link">
             <inertial>
             <origin
-                xyz="0.034411 3.2244E-06 0.02029"
+                xyz="6.8888E-08 0.0005198 -0.060933"
                 rpy="0 0 0" />
-            <mass value="0.00001" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass
+                value="0.23834" />
+            <inertia
+                ixx="0.00014646"
+                ixy="-4.6203E-05"
+                ixz="2.9588E-12"
+                iyy="0.00021227"
+                iyz="-5.2784E-06"
+                izz="0.00027887" />
             </inertial>
             <visual>
             <origin
@@ -24,12 +31,12 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/base_link.STL" />
+                filename="package://le_arm/meshes/arm_base_link.STL" />
             </geometry>
             <material
                 name="">
                 <color
-                rgba="0.75294 0.75294 0.75294 1" />
+                rgba="0.64706 0.51765 0 1" />
             </material>
             </visual>
             <collision>
@@ -38,7 +45,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/base_link.STL" />
+                filename="package://le_arm/meshes/arm_base_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -55,10 +62,17 @@
             name="shoulder_link">
             <inertial>
             <origin
-                xyz="-0.0005946 -0.00090913 0.017195"
+                xyz="-0.0071984 5.2965E-07 -0.040115"
                 rpy="0 0 0" />
-            <mass value="0.00001" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass
+                value="0.087666" />
+            <inertia
+                ixx="3.1627E-05"
+                ixy="-3.6677E-10"
+                ixz="5.4309E-06"
+                iyy="3.0921E-05"
+                iyz="-2.1161E-09"
+                izz="3.7509E-05" />
             </inertial>
             <visual>
             <origin
@@ -66,12 +80,12 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/shoulder_link.STL" />
+                filename="package://le_arm/meshes/shoulder_link.STL" />
             </geometry>
             <material
                 name="">
                 <color
-                rgba="0.75294 0.75294 0.75294 1" />
+                rgba="0.89804 0.91765 0.92941 1" />
             </material>
             </visual>
             <collision>
@@ -80,7 +94,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/shoulder_link.STL" />
+                filename="package://le_arm/meshes/shoulder_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -98,28 +112,35 @@
             name="shoulder_pan_joint"
             type="revolute">
             <origin
-            xyz="0.0005 0 0.0535"
-            rpy="1.2297E-10 2.2825E-27 -3.4694E-17" />
+            xyz="0 0.0895 0"
+            rpy="2.4302 1.5708 0" />
             <parent
             link="arm_base_link" />
             <child
             link="shoulder_link" />
             <axis
-            xyz="0 0 1" />
+            xyz="-1 0 0" />
             <limit
-            lower="-1.57"
-            upper="1.57"
-            effort="1000"
-            velocity="2" />
+            lower="-3.14"
+            upper="3.14"
+            effort="100"
+            velocity="100" />
         </joint>
         <link
             name="upper_arm_link">
             <inertial>
             <origin
-                xyz="2.6345E-08 -0.02405 0.05197"
+                xyz="-0.00072842 -0.00022202 0.02553"
                 rpy="0 0 0" />
-            <mass value="0.00001" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass
+                value="0.10559" />
+            <inertia
+                ixx="0.00010233"
+                ixy="-5.0947E-08"
+                ixz="-6.5487E-07"
+                iyy="9.0284E-05"
+                iyz="-8.153E-08"
+                izz="1.8127E-05" />
             </inertial>
             <visual>
             <origin
@@ -127,12 +148,12 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/upper_arm_link.STL" />
+                filename="package://le_arm/meshes/upper_arm_link.STL" />
             </geometry>
             <material
                 name="">
                 <color
-                rgba="0.75294 0.75294 0.75294 1" />
+                rgba="0.89804 0.91765 0.92941 1" />
             </material>
             </visual>
             <collision>
@@ -141,7 +162,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/upper_arm_link.STL" />
+                filename="package://le_arm/meshes/upper_arm_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -155,31 +176,38 @@
         </gazebo> 
 
         <joint
-            name="shoulder_lift_joint" 
+            name="shoulder_lift_joint"
             type="revolute">
             <origin
-            xyz="-0.0105 0.0226 0.032"
-            rpy="-5.7183E-11 0.785 0" />
+            xyz="0 0 -0.14296"
+            rpy="3.1416 0 3.1359" />
             <parent
             link="shoulder_link" />
             <child
             link="upper_arm_link" />
             <axis
-            xyz="0 -1 0" />
+            xyz="0 0 1" />
             <limit
-            lower="-1.57"
-            upper="1.57"
-            effort="1000"
-            velocity="2" />
+            lower="-3.14"
+            upper="3.14"
+            effort="100"
+            velocity="100" />
         </joint>
         <link
             name="forearm_link">
             <inertial>
             <origin
-                xyz="3.5006E-08 0.0090395 0.033861"
+                xyz="-0.0074811 -0.0001625 -0.039025"
                 rpy="0 0 0" />
-            <mass value="0.00001" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass
+                value="0.086986" />
+            <inertia
+                ixx="3.031E-05"
+                ixy="3.5519E-10"
+                ixz="5.3565E-06"
+                iyy="3.0859E-05"
+                iyz="-1.6295E-08"
+                izz="3.7684E-05" />
             </inertial>
             <visual>
             <origin
@@ -187,12 +215,12 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/forearm_link.STL" />
+                filename="package://le_arm/meshes/forearm_link.STL" />
             </geometry>
             <material
                 name="">
                 <color
-                rgba="0.75294 0.75294 0.75294 1" />
+                rgba="0.89804 0.91765 0.92941 1" />
             </material>
             </visual>
             <collision>
@@ -201,7 +229,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/forearm_link.STL" />
+                filename="package://le_arm/meshes/forearm_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -219,28 +247,35 @@
             name="elbow_joint"
             type="revolute">
             <origin
-            xyz="0 -0.0335 0.104"
-            rpy="-1.6E-10 0.785 0" />
+            xyz="0 0 0.069036"
+            rpy="2.6943 0 0" />
             <parent
             link="upper_arm_link" />
             <child
             link="forearm_link" />
             <axis
-            xyz="0 -1 0" />
+            xyz="-1 0 0" />
             <limit
-            lower="-1.57"
-            upper="1.57"
-            effort="1000"
-            velocity="2" />
+            lower="-3.14"
+            upper="3.14"
+            effort="100"
+            velocity="100" />
         </joint>
         <link
             name="wrist_1_link">
             <inertial>
             <origin
-                xyz="-0.010432 0.010212 0.019017"
+                xyz="0.00020523 -0.0029296 0.0079122"
                 rpy="0 0 0" />
-            <mass value="0.00001" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass
+                value="0.013253" />
+            <inertia
+                ixx="2.333E-06"
+                ixy="-7.9684E-09"
+                ixz="4.9095E-09"
+                iyy="1.7076E-06"
+                iyz="1.1168E-07"
+                izz="3.0343E-06" />
             </inertial>
             <visual>
             <origin
@@ -248,12 +283,12 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/wrist_1_link.STL" />
+                filename="package://le_arm/meshes/wrist_1_link.STL" />
             </geometry>
             <material
                 name="">
                 <color
-                rgba="0.75294 0.75294 0.75294 1" />
+                rgba="1 1 1 1" />
             </material>
             </visual>
             <collision>
@@ -262,7 +297,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm/wrist_1_link.STL" />
+                filename="package://le_arm/meshes/wrist_1_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -279,20 +314,20 @@
             name="wrist_1_joint"
             type="revolute">
             <origin
-            xyz="-0.0007415 0.0054 0.088419"
-            rpy="5.3884E-11 0 0" />
+            xyz="0 0 -0.071693"
+            rpy="3.1416 0 2.8331" />
             <parent
             link="forearm_link" />
             <child
             link="wrist_1_link" />
             <axis
-            xyz="0 -1 0" />
+            xyz="0 0 1" />
             <limit
-            lower="-1.57"
-            upper="1.57"
-            effort="1000"
-            velocity="2" />
-        </joint>  
+            lower="-3.14"
+            upper="3.14"
+            effort="100"
+            velocity="100" />
+        </joint>
 
 
         <xacro:le_arm_gripper prefix="" parent="wrist_1_link" >
