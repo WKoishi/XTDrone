@@ -31,7 +31,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm_base_link.STL" />
+                filename="package://le_arm/meshes/arm/base_link.STL" />
             </geometry>
             <material
                 name="">
@@ -45,7 +45,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/arm_base_link.STL" />
+                filename="package://le_arm/meshes/arm/base_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -80,7 +80,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/shoulder_link.STL" />
+                filename="package://le_arm/meshes/arm/shoulder_link.STL" />
             </geometry>
             <material
                 name="">
@@ -94,7 +94,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/shoulder_link.STL" />
+                filename="package://le_arm/meshes/arm/shoulder_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -148,7 +148,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/upper_arm_link.STL" />
+                filename="package://le_arm/meshes/arm/upper_arm_link.STL" />
             </geometry>
             <material
                 name="">
@@ -162,7 +162,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/upper_arm_link.STL" />
+                filename="package://le_arm/meshes/arm/upper_arm_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -215,7 +215,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/forearm_link.STL" />
+                filename="package://le_arm/meshes/arm/forearm_link.STL" />
             </geometry>
             <material
                 name="">
@@ -229,7 +229,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/forearm_link.STL" />
+                filename="package://le_arm/meshes/arm/forearm_link.STL" />
             </geometry>
             </collision>
         </link>
@@ -283,7 +283,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/wrist_1_link.STL" />
+                filename="package://le_arm/meshes/arm/wrist_1_link.STL" />
             </geometry>
             <material
                 name="">
@@ -297,7 +297,7 @@
                 rpy="0 0 0" />
             <geometry>
                 <mesh
-                filename="package://le_arm/meshes/wrist_1_link.STL" />
+                filename="package://le_arm/meshes/arm/wrist_1_link.STL" />
             </geometry>
             </collision>
         </link>

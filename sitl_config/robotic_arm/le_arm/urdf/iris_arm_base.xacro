@@ -67,7 +67,7 @@
   <!-- Instantiate arm "mechanics" -->
   <xacro:include filename="$(find le_arm)/urdf/le_arm.urdf.xacro" />
   <xacro:le_arm parent="base_link" >
-    <origin xyz="-0.1 0 -0.05" rpy="0 3.14 3.14"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 3.14159"/>
   </xacro:le_arm>
 
   <xacro:if value="$(arg enable_wind)">
