@@ -621,5 +621,22 @@
         </limit>
       </axis>
     </joint>
+
+    <include>
+      <uri>model://flying_manipulator_sim</uri>
+      <pose>0 0 0.1 0 0 0</pose>
+    </include>
+    <joint name="flying_manipulator_joint" type="fixed">
+      <child>flying_manipulator_sim::arm_base_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <upper>0</upper>
+          <lower>0</lower>
+        </limit>
+      </axis>
+    </joint>
+
   </model>
 </sdf>
