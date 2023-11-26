@@ -26,22 +26,72 @@ namespace gazebo
     /// \param[in] _sdf A pointer to the plugin's SDF element.
     public: virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     {
-      // Safety check
-      if (_model->GetJointCount() == 0)
-      {
-        std::cerr << "Invalid joint count, Velodyne plugin not loaded\n";
-        return;
-      }
+      // // Safety check
+      // if (_model->GetJointCount() == 0)
+      // {
+      //   std::cerr << "Invalid joint count, Velodyne plugin not loaded\n";
+      //   return;
+      // }
 
       // Store the model pointer for convenience.
       this->model = _model;
 
-      // Get the first joint. We are making an assumption about the model
-      // having one joint that is the rotational joint.
-      this->joint = _model->GetJoints()[0];
+      // Get joint's namespace
+      this->joint_namespace = this->model->GetName ();
+      if ( !_sdf->HasElement ( "robotNamespace" ) ) {
+          ROS_INFO_NAMED(this->joint_namespace, "GazeboRosJointVelController Plugin missing <robotNamespace>, defaults to \"%s\"",
+                    this->joint_namespace.c_str() );
+      } else {
+          this->joint_namespace = _sdf->GetElement ( "robotNamespace" )->Get<std::string>();
+          if ( this->joint_namespace.empty() ) this->joint_namespace = this->model->GetName ();
+      }
+      if ( !joint_namespace.empty() ) this->joint_namespace += "/";
+
+      // Get joint
+      std::string joint_name;
+      if ( !_sdf->HasElement ( "jointName" ) ) {
+          ROS_ASSERT ( "GazeboRosJointVelController Plugin missing jointNames" );
+      } else {
+          sdf::ElementPtr element = _sdf->GetElement ( "jointName" ) ;
+          joint_name = element->Get<std::string>();
+      }
+      this->joint = this->model->GetJoint(joint_name);
+      if (!this->joint)
+        ROS_FATAL_NAMED(this->joint_namespace, "Joint %s does not exist!", joint_name.c_str());
 
       // Setup a P-controller, with a gain of 0.1.
       this->pid = common::PID(0.1, 0, 0);
+
+      if (_sdf->HasElement("p_gain"))
+      {
+        double p_gain = _sdf->Get<double>("p_gain");
+        this->pid.SetPGain(p_gain);
+        ROS_INFO_NAMED(this->joint_namespace, "Set p_gain %lf", p_gain);
+      }
+      if (_sdf->HasElement("i_gain"))
+      {
+        double i_gain = _sdf->Get<double>("i_gain");
+        this->pid.SetIGain(i_gain);
+        ROS_INFO_NAMED(this->joint_namespace, "Set i_gain %lf", i_gain);
+      }
+      if (_sdf->HasElement("d_gain"))
+      {
+        double d_gain = _sdf->Get<double>("d_gain");
+        this->pid.SetDGain(d_gain);
+        ROS_INFO_NAMED(this->joint_namespace, "Set d_gain %lf", d_gain);
+      }
+      if (_sdf->HasElement("i_min"))
+      {
+        double i_min = _sdf->Get<double>("i_min");
+        this->pid.SetIMin(i_min);
+        ROS_INFO_NAMED(this->joint_namespace, "Set i_min %lf", i_min);
+      }
+      if (_sdf->HasElement("i_max"))
+      {
+        double i_max = _sdf->Get<double>("i_max");
+        this->pid.SetIMax(i_max);
+        ROS_INFO_NAMED(this->joint_namespace, "Set i_max %lf", i_max);
+      }
 
       // Apply the P-controller to the joint.
       this->model->GetJointController()->SetVelocityPID(
@@ -56,20 +106,20 @@ namespace gazebo
 
       this->SetVelocity(velocity);
 
-      // Create the node
-      this->node = transport::NodePtr(new transport::Node());
-      #if GAZEBO_MAJOR_VERSION < 8
-      this->node->Init(this->model->GetWorld()->GetName());
-      #else
-      this->node->Init(this->model->GetWorld()->Name());
-      #endif
+      // // Create the node
+      // this->node = transport::NodePtr(new transport::Node());
+      // #if GAZEBO_MAJOR_VERSION < 8
+      // this->node->Init(this->model->GetWorld()->GetName());
+      // #else
+      // this->node->Init(this->model->GetWorld()->Name());
+      // #endif
 
-      // Create a topic name
-      std::string topicName = "~/" + this->model->GetName() + "/vel_cmd";
+      // // Create a topic name
+      // std::string topicName = "~/" + this->joint_namespace + "/vel_cmd";
 
-      // Subscribe to the topic, and register a callback
-      this->sub = this->node->Subscribe(topicName,
-         &JointVelControllerPlugin::OnMsg, this);
+      // // Subscribe to the topic, and register a callback
+      // this->sub = this->node->Subscribe(topicName,
+      //    &JointVelControllerPlugin::OnMsg, this);
 
       // Initialize ros, if it has not already bee initialized.
       if (!ros::isInitialized())
@@ -82,12 +132,12 @@ namespace gazebo
 
       // Create our ROS node. This acts in a similar manner to
       // the Gazebo node
-      this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
+      this->rosNode.reset(new ros::NodeHandle(this->joint_namespace));
 
       // Create a named topic, and subscribe to it.
       ros::SubscribeOptions so =
         ros::SubscribeOptions::create<std_msgs::Float32>(
-            "/" + this->model->GetName() + "/vel_cmd",
+            "/" + this->joint_namespace + "/vel_cmd",
             1,
             boost::bind(&JointVelControllerPlugin::OnRosMsg, this, _1),
             ros::VoidPtr(), &this->rosQueue);
@@ -134,11 +184,11 @@ namespace gazebo
       }
     }
 
-    /// \brief A node used for transport
-    private: transport::NodePtr node;
+    // /// \brief A node used for transport
+    // private: transport::NodePtr node;
 
-    /// \brief A subscriber to a named topic.
-    private: transport::SubscriberPtr sub;
+    // /// \brief A subscriber to a named topic.
+    // private: transport::SubscriberPtr sub;
 
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
@@ -160,6 +210,8 @@ namespace gazebo
 
     /// \brief A thread the keeps running the rosQueue
     private: std::thread rosQueueThread;
+
+    private: std::string joint_namespace;
 
   };
 
