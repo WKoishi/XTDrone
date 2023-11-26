@@ -283,6 +283,10 @@ add_library(gazebo_ros_joint_pose_trajectory src/gazebo_ros_joint_pose_trajector
 add_dependencies(gazebo_ros_joint_pose_trajectory ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_ros_joint_pose_trajectory ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(gazebo_ros_joint_vel_controller src/gazebo_ros_joint_vel_controller.cc)
+add_dependencies(gazebo_ros_joint_vel_controller ${catkin_EXPORTED_TARGETS})
+target_link_libraries(gazebo_ros_joint_vel_controller ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+
 add_library(gazebo_ros_diff_drive src/gazebo_ros_diff_drive.cpp)
 target_link_libraries(gazebo_ros_diff_drive gazebo_ros_utils ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
