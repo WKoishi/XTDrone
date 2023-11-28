@@ -238,15 +238,56 @@
       </axis>
     </joint>
 
-    <plugin name='joint_state' filename='libgazebo_ros_joint_state_publisher.so'>
+    <plugin name='joint_1_state' filename='libgazebo_ros_joint_state_publisher.so'>
+      <robotNamespace>joint_1</robotNamespace>
+      <jointName>arm_joint_1</jointName>
+    </plugin>
+
+    <plugin name='joint_2_state' filename='libgazebo_ros_joint_state_publisher.so'>
       <robotNamespace>joint_2</robotNamespace>
       <jointName>arm_joint_2</jointName>
     </plugin>
 
-    <plugin name='joint_controller' filename='libgazebo_ros_joint_vel_controller.so'>
+    <plugin name='joint_3_state' filename='libgazebo_ros_joint_state_publisher.so'>
+      <robotNamespace>joint_3</robotNamespace>
+      <jointName>arm_joint_3</jointName>
+    </plugin>
+
+    <plugin name='joint_4_state' filename='libgazebo_ros_joint_state_publisher.so'>
+      <robotNamespace>joint_4</robotNamespace>
+      <jointName>arm_joint_4</jointName>
+    </plugin>
+
+    <plugin name='joint_1_controller' filename='libgazebo_ros_joint_vel_controller.so'>
+      <robotNamespace>joint_1</robotNamespace>
+      <jointName>arm_joint_1</jointName>
+      <p_gain>0.01</p_gain>
+      <cmd_min>-1</cmd_min>
+      <cmd_max>1</cmd_max>
+    </plugin>
+
+    <plugin name='joint_2_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_2</robotNamespace>
       <jointName>arm_joint_2</jointName>
-      <p_gain>0.01</p_gain>
+      <p_gain>0.008</p_gain>
+      <cmd_min>-1</cmd_min>
+      <cmd_max>1</cmd_max>
+    </plugin>
+
+    <plugin name='joint_3_controller' filename='libgazebo_ros_joint_vel_controller.so'>
+      <robotNamespace>joint_3</robotNamespace>
+      <jointName>arm_joint_3</jointName>
+      <p_gain>0.008</p_gain>
+      <cmd_min>-1</cmd_min>
+      <cmd_max>1</cmd_max>
+    </plugin>
+
+    <plugin name='joint_4_controller' filename='libgazebo_ros_joint_vel_controller.so'>
+      <robotNamespace>joint_4</robotNamespace>
+      <jointName>arm_joint_4</jointName>
+      <p_gain>0.001</p_gain>
+      <cmd_min>-0.1</cmd_min>
+      <cmd_max>0.1</cmd_max>
     </plugin>
     
   </model>

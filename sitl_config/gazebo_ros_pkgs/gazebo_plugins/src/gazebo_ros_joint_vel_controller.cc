@@ -92,6 +92,18 @@ namespace gazebo
         this->pid.SetIMax(i_max);
         ROS_INFO_NAMED(this->joint_namespace, "Set i_max %lf", i_max);
       }
+      if (_sdf->HasElement("cmd_min"))
+      {
+        double cmd_min = _sdf->Get<double>("cmd_min");
+        this->pid.SetCmdMin(cmd_min);
+        ROS_INFO_NAMED(this->joint_namespace, "Set cmd_min %lf", cmd_min);
+      }
+      if (_sdf->HasElement("cmd_max"))
+      {
+        double cmd_max = _sdf->Get<double>("cmd_max");
+        this->pid.SetCmdMax(cmd_max);
+        ROS_INFO_NAMED(this->joint_namespace, "Set cmd_max %lf", cmd_max);
+      }
 
       // Apply the P-controller to the joint.
       this->model->GetJointController()->SetVelocityPID(
