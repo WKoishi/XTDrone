@@ -80,18 +80,7 @@ namespace gazebo
         this->pid.SetDGain(d_gain);
         ROS_INFO_NAMED(this->joint_namespace, "Set d_gain %lf", d_gain);
       }
-      if (_sdf->HasElement("i_min"))
-      {
-        double i_min = _sdf->Get<double>("i_min");
-        this->pid.SetIMin(i_min);
-        ROS_INFO_NAMED(this->joint_namespace, "Set i_min %lf", i_min);
-      }
-      if (_sdf->HasElement("i_max"))
-      {
-        double i_max = _sdf->Get<double>("i_max");
-        this->pid.SetIMax(i_max);
-        ROS_INFO_NAMED(this->joint_namespace, "Set i_max %lf", i_max);
-      }
+
       if (_sdf->HasElement("cmd_min"))
       {
         double cmd_min = _sdf->Get<double>("cmd_min");
@@ -103,6 +92,28 @@ namespace gazebo
         double cmd_max = _sdf->Get<double>("cmd_max");
         this->pid.SetCmdMax(cmd_max);
         ROS_INFO_NAMED(this->joint_namespace, "Set cmd_max %lf", cmd_max);
+      }
+
+      if (_sdf->HasElement("i_min"))
+      {
+        double i_min = _sdf->Get<double>("i_min");
+        this->pid.SetIMin(i_min);
+        ROS_INFO_NAMED(this->joint_namespace, "Set i_min %lf", i_min);
+      }
+      else
+      {
+        this->pid.SetIMin(this->pid.GetCmdMin());
+      }
+      
+      if (_sdf->HasElement("i_max"))
+      {
+        double i_max = _sdf->Get<double>("i_max");
+        this->pid.SetIMax(i_max);
+        ROS_INFO_NAMED(this->joint_namespace, "Set i_max %lf", i_max);
+      }
+      else
+      {
+        this->pid.SetIMax(this->pid.GetCmdMax());
       }
 
       // Apply the P-controller to the joint.
