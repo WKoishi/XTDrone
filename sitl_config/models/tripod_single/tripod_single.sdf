@@ -78,6 +78,7 @@
           <velocity>0</velocity>
         </limit>
         <dynamics>
+          <friction>100</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>

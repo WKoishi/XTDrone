@@ -74,10 +74,11 @@
         <limit>
           <lower>-3</lower>
           <upper>3</upper>
-          <effort>10</effort>
+          <effort>50</effort>
           <velocity>10</velocity>
         </limit>
         <dynamics>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -126,9 +127,10 @@
           <lower>-3</lower>
           <upper>3</upper>
           <effort>5</effort>
-          <velocity>10</velocity>
+          <velocity>5</velocity>
         </limit>
         <dynamics>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -177,9 +179,10 @@
           <lower>-3</lower>
           <upper>3</upper>
           <effort>5</effort>
-          <velocity>10</velocity>
+          <velocity>5</velocity>
         </limit>
         <dynamics>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -228,9 +231,10 @@
           <lower>-3</lower>
           <upper>3</upper>
           <effort>5</effort>
-          <velocity>10</velocity>
+          <velocity>5</velocity>
         </limit>
         <dynamics>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -261,33 +265,37 @@
     <plugin name='joint_1_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_1</robotNamespace>
       <jointName>arm_joint_1</jointName>
-      <p_gain>0.01</p_gain>
-      <cmd_min>-1</cmd_min>
-      <cmd_max>1</cmd_max>
+      <p_gain>1</p_gain>
+      <i_gain>20</i_gain>
+      <cmd_min>-17</cmd_min>
+      <cmd_max>17</cmd_max>
     </plugin>
 
     <plugin name='joint_2_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_2</robotNamespace>
       <jointName>arm_joint_2</jointName>
-      <p_gain>0.008</p_gain>
-      <cmd_min>-1</cmd_min>
-      <cmd_max>1</cmd_max>
+      <p_gain>0.05</p_gain>
+      <i_gain>1</i_gain>
+      <cmd_min>-3</cmd_min>
+      <cmd_max>3</cmd_max>
     </plugin>
 
     <plugin name='joint_3_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_3</robotNamespace>
       <jointName>arm_joint_3</jointName>
-      <p_gain>0.008</p_gain>
-      <cmd_min>-1</cmd_min>
-      <cmd_max>1</cmd_max>
+      <p_gain>0.05</p_gain>
+      <i_gain>1</i_gain>
+      <cmd_min>-3</cmd_min>
+      <cmd_max>3</cmd_max>
     </plugin>
 
     <plugin name='joint_4_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_4</robotNamespace>
       <jointName>arm_joint_4</jointName>
-      <p_gain>0.001</p_gain>
-      <cmd_min>-0.1</cmd_min>
-      <cmd_max>0.1</cmd_max>
+      <p_gain>0.05</p_gain>
+      <i_gain>0.4</i_gain>
+      <cmd_min>-0.6</cmd_min>
+      <cmd_max>0.6</cmd_max>
     </plugin>
     
   </model>
