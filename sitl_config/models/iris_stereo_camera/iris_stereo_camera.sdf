@@ -640,7 +640,7 @@
 
     <include>
       <uri>model://tripod_single</uri>
-      <pose>0 -0.22 -0.17 0 -0 0</pose>
+      <pose>0 -0.22 -0.2 0 -0 0</pose>
       <name>tripod_0</name>
     </include>
     <joint name="tripod_joint_0" type="revolute">
@@ -660,7 +660,7 @@
 
     <include>
       <uri>model://tripod_single</uri>
-      <pose>0 0.22 -0.17 0 -0 0</pose>
+      <pose>0 0.22 -0.2 0 -0 0</pose>
       <name>tripod_1</name>
     </include>
     <joint name="tripod_joint_1" type="revolute">

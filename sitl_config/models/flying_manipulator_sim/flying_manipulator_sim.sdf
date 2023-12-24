@@ -74,11 +74,12 @@
         <limit>
           <lower>-3</lower>
           <upper>3</upper>
-          <effort>50</effort>
-          <velocity>10</velocity>
+          <effort>30</effort>
+          <velocity>2</velocity>
         </limit>
         <dynamics>
-          <friction>0.1</friction>
+          <damping>0</damping>
+          <friction>0.05</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -126,11 +127,12 @@
         <limit>
           <lower>-3</lower>
           <upper>3</upper>
-          <effort>5</effort>
-          <velocity>5</velocity>
+          <effort>6</effort>
+          <velocity>2</velocity>
         </limit>
         <dynamics>
-          <friction>0.1</friction>
+          <damping>0</damping>
+          <friction>0.05</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -178,11 +180,12 @@
         <limit>
           <lower>-3</lower>
           <upper>3</upper>
-          <effort>5</effort>
-          <velocity>5</velocity>
+          <effort>6</effort>
+          <velocity>2</velocity>
         </limit>
         <dynamics>
-          <friction>0.1</friction>
+          <damping>0</damping>
+          <friction>0.05</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -192,15 +195,15 @@
     <link name='arm_link_4'>
       <pose frame=''>-1e-06 1e-06 -0.3115 3.14159 -7e-06 3.14159</pose>
       <inertial>
-        <pose frame=''>-0.00293 -0.000205 0.009605 0 -0 0</pose>
-        <mass>0.013253</mass>
+        <pose frame=''>-0.006817 0.006817 0.017646 0 -0 0</pose>
+        <mass>0.13306</mass>
         <inertia>
-          <ixx>1.7076e-06</ixx>
-          <ixy>7.9684e-09</ixy>
-          <ixz>1.1168e-07</ixz>
-          <iyy>2.333e-06</iyy>
-          <iyz>-4.9095e-09</iyz>
-          <izz>3.0343e-06</izz>
+          <ixx>6.7045e-05</ixx>
+          <ixy>-6.1843e-06</ixy>
+          <ixz>-3.4889e-06</ixz>
+          <iyy>6.7045e-05</iyy>
+          <iyz>3.4889e-06</iyz>
+          <izz>6.0869e-05</izz>
         </inertia>
       </inertial>
       <collision name='arm_link_4_collision'>
@@ -230,11 +233,12 @@
         <limit>
           <lower>-3</lower>
           <upper>3</upper>
-          <effort>5</effort>
-          <velocity>5</velocity>
+          <effort>2</effort>
+          <velocity>2</velocity>
         </limit>
         <dynamics>
-          <friction>0.1</friction>
+          <damping>0</damping>
+          <friction>0.05</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>

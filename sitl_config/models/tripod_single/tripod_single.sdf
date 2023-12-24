@@ -4,21 +4,21 @@
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
-        <mass>0.024788</mass>
+        <mass>0.025</mass>
         <inertia>
-          <ixx>0.00024196</ixx>
+          <ixx>0.000334</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00024196</iyy>
+          <iyy>0.000334</iyy>
           <iyz>0</iyz>
-          <izz>3.1009e-06</izz>
+          <izz>1.25e-06</izz>
         </inertia>
       </inertial>
       <collision name='base_link_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
-            <length>0.34</length>
+            <length>0.4</length>
             <radius>0.01</radius>
           </cylinder>
         </geometry>
@@ -27,31 +27,31 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
-            <length>0.34</length>
+            <length>0.4</length>
             <radius>0.01</radius>
           </cylinder>
         </geometry>
       </visual>
     </link>
     <link name='foot_link'>
-      <pose frame=''>0 0 -0.17 0 -0 0</pose>
+      <pose frame=''>0 0 -0.2 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
-        <mass>0.024788</mass>
+        <mass>0.025</mass>
         <inertia>
-          <ixx>0.00024196</ixx>
+          <ixx>0.000334</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00024196</iyy>
+          <iyy>0.000334</iyy>
           <iyz>0</iyz>
-          <izz>3.1009e-06</izz>
+          <izz>1.25e-06</izz>
         </inertia>
       </inertial>
       <collision name='foot_link_collision'>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
         <geometry>
           <cylinder>
-            <length>0.34</length>
+            <length>0.4</length>
             <radius>0.01</radius>
           </cylinder>
         </geometry>
@@ -60,7 +60,7 @@
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
         <geometry>
           <cylinder>
-            <length>0.34</length>
+            <length>0.4</length>
             <radius>0.01</radius>
           </cylinder>
         </geometry>
