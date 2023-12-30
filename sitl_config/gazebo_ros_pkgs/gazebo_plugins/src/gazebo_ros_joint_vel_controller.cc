@@ -116,9 +116,13 @@ namespace gazebo
         this->pid.SetIMax(this->pid.GetCmdMax());
       }
 
-      // Apply the P-controller to the joint.
-      this->model->GetJointController()->SetVelocityPID(
-          this->joint->GetScopedName(), this->pid);
+      // // Apply the P-controller to the joint.
+      // this->model->GetJointController()->SetVelocityPID(
+      //     this->joint->GetScopedName(), this->pid);
+
+      this->joint_controller.reset(new physics::JointController(this->model));
+      this->joint_controller->AddJoint(this->joint);
+      this->joint_controller->SetVelocityPID(this->joint->GetScopedName(), this->pid);
 
       // Default to zero velocity
       double velocity = 0;
@@ -158,27 +162,27 @@ namespace gazebo
       this->rosNode.reset(new ros::NodeHandle(this->joint_namespace));
 
       // Create a named topic, and subscribe to it.
-      ros::SubscribeOptions so =
+      ros::SubscribeOptions sub_options =
         ros::SubscribeOptions::create<std_msgs::Float32>(
             "/" + this->joint_namespace + "/vel_cmd",
             1,
             boost::bind(&JointVelControllerPlugin::OnRosMsg, this, _1),
             ros::VoidPtr(), &this->rosQueue);
-      this->rosSub = this->rosNode->subscribe(so);
+      this->rosSub = this->rosNode->subscribe(sub_options);
 
-      // Spin up the queue helper thread.
-      this->rosQueueThread =
-        std::thread(std::bind(&JointVelControllerPlugin::QueueThread, this));
+      this->gazebo_update_connect = event::Events::ConnectWorldUpdateBegin(
+        std::bind(&JointVelControllerPlugin::gazebo_update_callback, this));
 
     }
 
     /// \brief Set the velocity of the Velodyne
     /// \param[in] _vel New target velocity
-    public: void SetVelocity(const double &_vel)
+    public: void SetVelocity(const double _vel)
     {
       // Set the joint's target velocity.
-      this->model->GetJointController()->SetVelocityTarget(
-          this->joint->GetScopedName(), _vel);
+      // this->model->GetJointController()->SetVelocityTarget(
+      //     this->joint->GetScopedName(), _vel);
+      this->joint_controller->SetVelocityTarget(this->joint->GetScopedName(), _vel);
     }
 
     /// \brief Handle incoming message
@@ -198,13 +202,19 @@ namespace gazebo
     }
 
     /// \brief ROS helper function that processes messages
-    private: void QueueThread()
+    // private: void QueueThread()
+    // {
+    //   static const double timeout = 0.01;
+    //   while (this->rosNode->ok())
+    //   {
+    //     this->rosQueue.callAvailable(ros::WallDuration(timeout));
+    //   }
+    // }
+
+    private: void gazebo_update_callback(void)
     {
-      static const double timeout = 0.01;
-      while (this->rosNode->ok())
-      {
-        this->rosQueue.callAvailable(ros::WallDuration(timeout));
-      }
+      this->rosQueue.callAvailable();
+      this->joint_controller->Update();
     }
 
     // /// \brief A node used for transport
@@ -222,6 +232,8 @@ namespace gazebo
     /// \brief A PID controller for the joint.
     private: common::PID pid;
 
+    private: std::unique_ptr<physics::JointController> joint_controller;
+
     /// \brief A node use for ROS transport
     private: std::unique_ptr<ros::NodeHandle> rosNode;
 
@@ -231,8 +243,7 @@ namespace gazebo
     /// \brief A ROS callbackqueue that helps process messages
     private: ros::CallbackQueue rosQueue;
 
-    /// \brief A thread the keeps running the rosQueue
-    private: std::thread rosQueueThread;
+    private: event::ConnectionPtr gazebo_update_connect;
 
     private: std::string joint_namespace;
 
