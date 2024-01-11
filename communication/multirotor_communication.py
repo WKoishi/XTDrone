@@ -3,6 +3,7 @@ from mavros_msgs.msg import PositionTarget
 from mavros_msgs.srv import CommandBool, SetMode, ParamSet
 from geometry_msgs.msg import PoseStamped, Pose, Twist
 from std_msgs.msg import String
+from std_msgs.msg import Bool
 from pyquaternion import Quaternion
 import sys
 
@@ -26,6 +27,9 @@ class Communication:
         self.flight_mode = None
         self.mission = None
         self.last_cmd = None
+
+        self.is_release_hover = False
+        self.cmd_release_hover_active_count = 0
             
         '''
         ros subscribers
@@ -38,6 +42,8 @@ class Communication:
         self.cmd_vel_enu_sub = rospy.Subscriber("/xtdrone/"+self.vehicle_type+'_'+self.vehicle_id+"/cmd_vel_enu", Twist, self.cmd_vel_enu_callback,queue_size=1)
         self.cmd_accel_flu_sub = rospy.Subscriber("/xtdrone/"+self.vehicle_type+'_'+self.vehicle_id+"/cmd_accel_flu", Twist, self.cmd_accel_flu_callback,queue_size=1)
         self.cmd_accel_enu_sub = rospy.Subscriber("/xtdrone/"+self.vehicle_type+'_'+self.vehicle_id+"/cmd_accel_enu", Twist, self.cmd_accel_enu_callback,queue_size=1)
+
+        self.cmd_release_hover_sub = rospy.Subscriber("/xtdrone/"+self.vehicle_type+'_'+self.vehicle_id+"/cmd_release_hover", Bool, self.cmd_release_hover_callback, queue_size=1)
             
         ''' 
         ros publishers
@@ -57,7 +63,15 @@ class Communication:
         main ROS thread
         '''
         while not rospy.is_shutdown():
-            self.target_motion_pub.publish(self.target_motion)
+
+            if self.is_release_hover:
+                if self.cmd_release_hover_active_count <= 0:
+                    self.is_release_hover = False
+                    print("enable hover")
+                else:
+                    self.cmd_release_hover_active_count -= 1
+            else:
+                self.target_motion_pub.publish(self.target_motion)
             rate.sleep()
 
     def local_pose_callback(self, msg):
@@ -97,6 +111,15 @@ class Communication:
                             + PositionTarget.IGNORE_YAW
 
         return target_raw_pose
+    
+    def cmd_release_hover_callback(self, msg):
+        if (True == msg.data):
+            print("release hover")
+            self.is_release_hover = True
+            self.cmd_release_hover_active_count = 3
+        else:
+            print("enable hover")
+            self.is_release_hover = False
 
     def cmd_pose_flu_callback(self, msg):
         self.coordinate_frame = 9
