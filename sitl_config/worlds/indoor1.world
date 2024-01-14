@@ -655,7 +655,7 @@
             <izz>100000</izz>
           </inertia>
         </inertial>
-        <collision name='collision'>
+        <!-- <collision name='collision'>
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <box>
@@ -682,7 +682,7 @@
             </contact>
 
           <max_contacts>10</max_contacts>
-        </collision>
+        </collision> -->
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
