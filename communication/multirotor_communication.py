@@ -67,6 +67,7 @@ class Communication:
             if self.is_release_hover:
                 if self.cmd_release_hover_active_count <= 0:
                     self.is_release_hover = False
+                    self.hover()
                     print("enable hover")
                 else:
                     self.cmd_release_hover_active_count -= 1
@@ -119,6 +120,8 @@ class Communication:
             self.cmd_release_hover_active_count = 3
         else:
             print("enable hover")
+            if True == self.is_release_hover:
+                self.hover()
             self.is_release_hover = False
 
     def cmd_pose_flu_callback(self, msg):
