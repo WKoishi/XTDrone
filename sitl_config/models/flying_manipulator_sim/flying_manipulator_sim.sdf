@@ -287,10 +287,10 @@
     <plugin name='joint_3_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_3</robotNamespace>
       <jointName>arm_joint_3</jointName>
-      <p_gain>0.05</p_gain>
-      <i_gain>1</i_gain>
-      <cmd_min>-3</cmd_min>
-      <cmd_max>3</cmd_max>
+      <p_gain>0.1</p_gain>
+      <i_gain>7</i_gain>
+      <cmd_min>-6</cmd_min>
+      <cmd_max>6</cmd_max>
     </plugin>
 
     <plugin name='joint_4_controller' filename='libgazebo_ros_joint_vel_controller.so'>
