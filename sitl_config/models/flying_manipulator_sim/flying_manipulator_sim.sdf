@@ -132,7 +132,7 @@
         </limit>
         <dynamics>
           <damping>0</damping>
-          <friction>0.01</friction>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -278,8 +278,8 @@
     <plugin name='joint_2_controller' filename='libgazebo_ros_joint_vel_controller.so'>
       <robotNamespace>joint_2</robotNamespace>
       <jointName>arm_joint_2</jointName>
-      <p_gain>0.1</p_gain>
-      <i_gain>5</i_gain>
+      <p_gain>0.07</p_gain>
+      <i_gain>5.5</i_gain>
       <cmd_min>-6</cmd_min>
       <cmd_max>6</cmd_max>
     </plugin>
